@@ -1,4 +1,4 @@
-#include "bureaucrat.hpp"
+#include "Bureaucrat.hpp"
 
 int main() {
   std::cout << "--- Test 1: Valid Bureaucrats ---" << std::endl;

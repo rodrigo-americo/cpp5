@@ -1,60 +1,66 @@
-#include "bureaucrat.hpp"
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main() {
-  std::cout << "--- Test 1: Valid Bureaucrats ---" << std::endl;
-  try {
-    Bureaucrat b1("Alice", 1);
-    std::cout << b1;
-    Bureaucrat b2("Bob", 150);
-    std::cout << b2;
-    Bureaucrat b3("Charlie", 75);
-    std::cout << b3;
-  } catch (std::exception &e) {
-    std::cerr << "Exception: " << e.what() << std::endl;
-  }
+    std::cout << "--- Teste 1: Form com grade válido ---" << std::endl;
+    try {
+        Form f("Contrato", 50, 100);
+        std::cout << f;
+    }
+    catch (std::exception &e) {
+        std::cout << "Erro: " << e.what() << std::endl;
+    }
 
-  std::cout << "\n--- Test 2: Invalid Bureaucrat (Grade too high) ---"
-            << std::endl;
-  try {
-    Bureaucrat invalid1("TooHigh", 0);
-    std::cout << invalid1;
-  } catch (std::exception &e) {
-    std::cerr << "Exception caught: " << e.what() << std::endl;
-  }
+    std::cout << "\n--- Teste 2: Form com gradeToSign inválido (0) ---" << std::endl;
+    try {
+        Form f("Inválido", 0, 100);
+        std::cout << f;
+    }
+    catch (std::exception &e) {
+        std::cout << "Erro: " << e.what() << std::endl;
+    }
 
-  std::cout << "\n--- Test 3: Invalid Bureaucrat (Grade too low) ---"
-            << std::endl;
-  try {
-    Bureaucrat invalid2("TooLow", 151);
-    std::cout << invalid2;
-  } catch (std::exception &e) {
-    std::cerr << "Exception caught: " << e.what() << std::endl;
-  }
+    std::cout << "\n--- Teste 3: Form com gradeToExecute inválido (200) ---" << std::endl;
+    try {
+        Form f("Inválido2", 50, 200);
+        std::cout << f;
+    }
+    catch (std::exception &e) {
+        std::cout << "Erro: " << e.what() << std::endl;
+    }
 
-  std::cout << "\n--- Test 4: Increment Grade ---" << std::endl;
-  try {
-    Bureaucrat b("Dave", 2);
-    std::cout << "Before: " << b;
-    b.incrementGrade();
-    std::cout << "After increment: " << b;
-    b.incrementGrade(); // Should throw here (grade 1 -> 0)
-    std::cout << "After increment again: " << b;
-  } catch (std::exception &e) {
-    std::cerr << "Exception caught: " << e.what() << std::endl;
-  }
+    std::cout << "\n--- Teste 4: Bureaucrat com grade suficiente para assinar ---" << std::endl;
+    try {
+        Bureaucrat b("Alice", 30);
+        Form f("Contrato", 50, 100);
+        std::cout << b;
+        std::cout << f;
+        b.signForm(f);
+        std::cout << f;
+    }
+    catch (std::exception &e) {
+        std::cout << "Erro: " << e.what() << std::endl;
+    }
 
-  std::cout << "\n--- Test 5: Decrement Grade ---" << std::endl;
-  try {
-    Bureaucrat b("Eve", 149);
-    std::cout << "Before: " << b;
-    b.decrementGrade();
-    std::cout << "After decrement: " << b;
-    b.decrementGrade(); // Should throw here (grade 150 -> 151)
-    std::cout << "After decrement again: " << b;
-  } catch (std::exception &e) {
-    std::cerr << "Exception caught: " << e.what() << std::endl;
-  }
+    std::cout << "\n--- Teste 5: Bureaucrat sem grade suficiente para assinar ---" << std::endl;
+    try {
+        Bureaucrat b("Bob", 100);
+        Form f("Contrato", 50, 100);
+        std::cout << b;
+        b.signForm(f);
+        std::cout << f;
+    }
+    catch (std::exception &e) {
+        std::cout << "Erro: " << e.what() << std::endl;
+    }
 
-  std::cout << "\n--- Tests Completed ---" << std::endl;
-  return 0;
+    std::cout << "\n--- Teste 6: Bureaucrat com grade inválido ---" << std::endl;
+    try {
+        Bureaucrat b("Carlos", 0);
+    }
+    catch (std::exception &e) {
+        std::cout << "Erro: " << e.what() << std::endl;
+    }
+
+    return 0;
 }
