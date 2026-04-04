@@ -35,15 +35,18 @@ Intern::~Intern() {
 AForm *Intern::makeForm(std::string formName, std::string target) {
     FormEntry forms[] = {
         {"shrubbery creation", &createShrubbery},
+        {"criação de arbusto", &createShrubbery},
         {"robotomy request", &createRobotomy},
-        {"presidential pardon", &createPardon}
+        {"pedido de robotomia", &createRobotomy},
+        {"presidential pardon", &createPardon},
+        {"perdão presidencial", &createPardon}
     };
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 6; i++) {
         if (forms[i].name == formName) {
-            std::cout << "Intern creates " << formName << std::endl;
+            std::cout << "Intern cria " << formName << std::endl;
             return forms[i].create(target);
         }
     }
-    std::cerr << "Intern: unknown form name: " << formName << std::endl;
+    std::cerr << "Intern: formulário desconhecido: " << formName << std::endl;
     return NULL;
 }
