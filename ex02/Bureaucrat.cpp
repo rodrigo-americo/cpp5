@@ -49,11 +49,11 @@ void Bureaucrat::signForm(AForm &form) const {
     try
     {
         form.beSigned(*this);
-        std::cout << this->name << " signs " << form.getName() << std::endl;
+        std::cout << this->name << " assinou " << form.getName() << std::endl;
     }
     catch (const std::exception &e)
     {
-        std::cerr << this->name << " cannot sign " << form.getName() << " because " << e.what() << std::endl;
+        std::cerr << this->name << " não conseguiu assinar " << form.getName() << " porque " << e.what() << std::endl;
     }
 }
 
@@ -61,11 +61,11 @@ void Bureaucrat::executeForm(AForm const &form) const {
     try
     {
         form.execute(*this);
-        std::cout << this->name << " executes " << form.getName() << std::endl;
+        std::cout << this->name << " executou " << form.getName() << std::endl;
     }
     catch (const std::exception &e)
     {
-        std::cerr << this->name << " cannot execute " << form.getName() << " because " << e.what() << std::endl;
+        std::cerr << this->name << " não executou " << form.getName() << " porque " << e.what() << std::endl;
     }
 }
 
@@ -79,6 +79,6 @@ const char *Bureaucrat::GradeTooLowException::what() const throw() {
 }
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
-    os << bureaucrat.getName() << ", burocrata com classificação " << bureaucrat.getGrade() << std::endl;
+    os << bureaucrat.getName() << ", burocrata com classificação " << bureaucrat.getGrade() << "." << std::endl;
     return os;
 }
